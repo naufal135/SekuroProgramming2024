@@ -60,6 +60,7 @@ int main() {
         }
 
         int input;
+        cout << "Input: ";
         cin >> input;
 
         if (input < 0 || input > inputs_len) {
