@@ -1,6 +1,8 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <math.h>
+#include <string>
 
 #define PI 3.14159265358
 
@@ -119,6 +121,50 @@ int main() {
                 hist_pointer++;
                 drone_x = drone_history[hist_pointer*2];
                 drone_y = drone_history[hist_pointer*2 + 1];
+                break;
+            }
+            case 6: { // save
+                std::ofstream save_file("save.txt");
+                for (float i: drone_history) {
+                    save_file << i << ',';
+                }
+                save_file << hist_pointer;
+                save_file.close();
+                break;
+            }
+            case 7: { // save
+                std::ifstream save_file("save.txt");
+                std::string save_string;
+
+                save_file >> save_string;
+                save_file.close();
+
+                int end = save_string.size()-1;
+                int last_delimit = end;
+                std::vector<float> rev_hist;
+
+                for (int i = end; i > 0; i--) {
+                    if (save_string[i] == ',') {
+                        if (last_delimit == end) {
+                            hist_pointer = stoi(save_string.substr(i+1, last_delimit-i));
+                        } else {
+                            int num = stoi(save_string.substr(i+1, last_delimit-i));
+                            rev_hist.push_back(num);
+                        }
+                        last_delimit = i;
+                    }
+                }
+
+                // Final item
+                int num = stoi(save_string.substr(0, last_delimit));
+                rev_hist.push_back(num);
+
+                drone_history.erase(drone_history.begin(), drone_history.end());
+                for (std::vector<float>::reverse_iterator it = rev_hist.rbegin(); it != rev_hist.rend(); ++it) {
+                    cout << *it << endl;
+                    drone_history.push_back(*it);
+                }
+
                 break;
             }
             case 8: { // quit
