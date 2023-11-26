@@ -7,7 +7,8 @@
 using std::cout, std::cin, std::endl;
 
 float drone_x, drone_y = 0;
-std::vector<std::array<float, 2>> drone_history = {};
+int hist_pointer = -1;
+std::vector<float> drone_history;
 
 std::string inputs[] = {
     "gerak",
@@ -27,6 +28,13 @@ float ask_float_input(std::string name) {
     cin >> input;
 
     return input;
+}
+
+void push_history() {
+    drone_history.push_back(drone_x);
+    drone_history.push_back(drone_y);
+
+    hist_pointer += 1;
 }
 
 int main() {
@@ -59,10 +67,20 @@ int main() {
 
                 drone_x += x;
                 drone_y += y;
+
+                push_history();
                 break;
             }
             case 2: { // lokasi
-                cout << "(" << drone_x << ", " << drone_y << ")" << endl;
+                if (hist_pointer < 0) {
+                    cout << "(0, 0)\n"; // Pasti (0, 0)
+                } else {
+                    float x = drone_history[hist_pointer*2];
+                    float y = drone_history[hist_pointer*2 + 1];
+
+                    cout << "(" << x << ", " << y << ")\n";
+                }
+
                 system("pause");
                 break;
             }
@@ -76,6 +94,8 @@ int main() {
                 float d = v * t;
                 drone_x += d * cos(theta * PI / 180);
                 drone_y += d * sin(theta * PI / 180);
+
+                push_history();
                 break;
             }
             case 8: { // quit
