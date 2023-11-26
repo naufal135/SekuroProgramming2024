@@ -33,7 +33,6 @@ float ask_float_input(std::string name) {
 }
 
 void push_history() {
-    cout << hist_pointer << endl;
     if ((hist_pointer+1) * 2 != drone_history.size()) {
         // Hilangkan history
         drone_history.erase(drone_history.begin()+((hist_pointer+1)*2), drone_history.end());
@@ -42,10 +41,6 @@ void push_history() {
     drone_history.push_back(drone_y);
 
     hist_pointer++;
-
-    for (float i: drone_history) 
-        cout << i << ", ";
-    cout << endl;
 }
 
 int main() {
@@ -162,7 +157,6 @@ int main() {
 
                 drone_history.erase(drone_history.begin(), drone_history.end());
                 for (std::vector<float>::reverse_iterator it = rev_hist.rbegin(); it != rev_hist.rend(); ++it) {
-                    cout << *it << endl;
                     drone_history.push_back(*it);
                 }
 
