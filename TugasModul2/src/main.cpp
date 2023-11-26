@@ -31,10 +31,19 @@ float ask_float_input(std::string name) {
 }
 
 void push_history() {
+    cout << hist_pointer << endl;
+    if ((hist_pointer+1) * 2 != drone_history.size()) {
+        // Hilangkan history
+        drone_history.erase(drone_history.begin()+((hist_pointer+1)*2), drone_history.end());
+    }
     drone_history.push_back(drone_x);
     drone_history.push_back(drone_y);
 
-    hist_pointer += 1;
+    hist_pointer++;
+
+    for (float i: drone_history) 
+        cout << i << ", ";
+    cout << endl;
 }
 
 int main() {
@@ -96,6 +105,20 @@ int main() {
                 drone_y += d * sin(theta * PI / 180);
 
                 push_history();
+                break;
+            }
+            case 4: { // undo
+                if (hist_pointer < 0) {cout << "Tidak bisa undo!\n"; break;}
+                hist_pointer--;
+                drone_x = drone_history[hist_pointer*2];
+                drone_y = drone_history[hist_pointer*2 + 1];
+                break;
+            }
+            case 5: { // redo
+                if ((hist_pointer + 1)*2 == drone_history.size()) {cout << "Tidak bisa redo!\n"; break;}
+                hist_pointer++;
+                drone_x = drone_history[hist_pointer*2];
+                drone_y = drone_history[hist_pointer*2 + 1];
                 break;
             }
             case 8: { // quit
