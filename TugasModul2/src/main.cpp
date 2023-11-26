@@ -144,7 +144,7 @@ int main() {
                         if (last_delimit == end) {
                             hist_pointer = stoi(save_string.substr(i+1, last_delimit-i));
                         } else {
-                            int num = stoi(save_string.substr(i+1, last_delimit-i));
+                            float num = stof(save_string.substr(i+1, last_delimit-i));
                             rev_hist.push_back(num);
                         }
                         last_delimit = i;
