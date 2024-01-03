@@ -7,12 +7,13 @@
 
 class Matrix {
     private:
-        int width;
-        std::vector<std::vector<float>> members;
+        size_t x;
+        size_t y;
+        std::vector<std::vector<float>> rows;
     public:
         // Constructor
         Matrix(std::initializer_list<std::vector<float>>);
-        Matrix(int x, int y);
+        Matrix(size_t x, size_t y);
 
         // Methods
         void display();
