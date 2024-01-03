@@ -9,14 +9,14 @@ const std::vector<std::vector<float>> ZERO_MATRIX = {{0}};
 Matrix::Matrix(std::initializer_list<std::vector<float>> arrays) {
     std::vector<std::vector<float>> rows;
     rows.insert(rows.end(), arrays.begin(), arrays.end());
-    this->rows = rows;
+    this->data = rows;
 
     // Check length of rows
     size_t l = rows[0].size();
-    for (std::vector<float> v: this->rows) {
+    for (std::vector<float> v: this->data) {
         if (v.size() != l) {
             std::cout << "Matrix row size is variable!" << std::endl;
-            this->rows = ZERO_MATRIX;
+            this->data = ZERO_MATRIX;
             l = 0;
             break;
         }
@@ -24,8 +24,27 @@ Matrix::Matrix(std::initializer_list<std::vector<float>> arrays) {
 
     // Set size
     this->x = l;
-    this->y = this->rows.size();
+    this->y = this->data.size();
 };
+
+Matrix::Matrix(std::vector<std::vector<float>> new_mat) {
+    this->data = new_mat;
+
+    // Check length of rows
+    size_t l = this->data[0].size();
+    for (std::vector<float> v: this->data) {
+        if (v.size() != l) {
+            std::cout << "Matrix row size is variable!" << std::endl;
+            this->data = ZERO_MATRIX;
+            l = 0;
+            break;
+        }
+    }
+
+    // Set size
+    this->x = l;
+    this->y = this->data.size();
+}
 
 Matrix::Matrix(size_t x, size_t y) {
     std::vector<std::vector<float>> rows;
@@ -35,14 +54,14 @@ Matrix::Matrix(size_t x, size_t y) {
         rows.push_back(row_n);
     }
 
-    this->rows = rows;
+    this->data = rows;
     this->x = x;
     this->y = y;
 }
 
 // Methods
 void Matrix::display() {
-    for (std::vector<float> v: this->rows) {
+    for (std::vector<float> v: this->data) {
         for (float n: v) {
             std::cout << n << ", ";
         }
