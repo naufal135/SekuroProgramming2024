@@ -23,6 +23,7 @@ class Matrix {
         Matrix operator+(Matrix b);
         Matrix operator-(Matrix b);
         Matrix operator*(Matrix b);
+        Matrix operator*(float c);
 };
 
 #endif

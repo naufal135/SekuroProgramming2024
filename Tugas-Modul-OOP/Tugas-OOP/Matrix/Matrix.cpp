@@ -128,3 +128,16 @@ Matrix Matrix::operator*(Matrix b) {
 
     return Matrix(result);
 }
+
+Matrix Matrix::operator*(float c) {
+    std::vector<std::vector<float>> result;
+    for (size_t i_y = 0; i_y < this->y; ++i_y) {
+        std::vector<float> row;
+        for (size_t i_x = 0; i_x < this->x; ++i_x) {
+            row.push_back(this->data[i_y][i_x]*c);
+        }
+        result.push_back(row);
+    }
+
+    return Matrix(result);
+}
