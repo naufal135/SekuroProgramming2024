@@ -106,3 +106,25 @@ Matrix Matrix::operator-(Matrix b) {
 
     return Matrix(result);
 }
+
+Matrix Matrix::operator*(Matrix b) {
+    if (this->x != b.y) {
+        std::cout << "Multiplication cannot be done. The number of columns in the first matrix should be equal to the number of rows in the second" << std::endl;
+        return ZERO_MATRIX;
+    }
+
+    std::vector<std::vector<float>> result;
+    for (size_t i = 0; i < this->y; ++i) {
+        std::vector<float> row;
+        for (size_t j = 0; j < b.x; ++j) {
+            float r = 0;
+            for (size_t k = 0; k < b.y; ++k) {
+                r += this->data[i][k] * b.data[k][j];
+            }
+            row.push_back(r);
+        }
+        result.push_back(row);
+    }
+
+    return Matrix(result);
+}
