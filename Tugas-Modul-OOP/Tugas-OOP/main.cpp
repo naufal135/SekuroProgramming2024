@@ -13,4 +13,6 @@ int main() {
     Swerve robot(0.26363, 0.26363, 0, 5, 0);
 
     Matrix v = robot.velocityCommand(v_x(1), v_y(1), 0);
+    robot.updatePose(v, 0.01);
+    robot.getPose().display();
 }
