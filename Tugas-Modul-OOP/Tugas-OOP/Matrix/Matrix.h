@@ -24,6 +24,7 @@ class Matrix {
         Matrix operator-(Matrix b);
         Matrix operator*(Matrix b);
         Matrix operator*(float c);
+        float operator[](size_t y, size_t x); // C++23
 };
 
 #endif

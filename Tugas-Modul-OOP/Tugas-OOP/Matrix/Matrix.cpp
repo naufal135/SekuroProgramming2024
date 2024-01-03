@@ -141,3 +141,7 @@ Matrix Matrix::operator*(float c) {
 
     return Matrix(result);
 }
+
+float Matrix::operator[](size_t y, size_t x) {
+    return this->data[y][x];
+}
