@@ -4,6 +4,9 @@ int main() {
     Matrix M = {{1, 2}, {3, 4}};
     M.display();
 
-    Matrix M2(5, 5);
+    Matrix M2 = {{2, 2}, {2, 2}};
     M2.display();
+
+    Matrix R = M - M2;
+    R.display();
 }

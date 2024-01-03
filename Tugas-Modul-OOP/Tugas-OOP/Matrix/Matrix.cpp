@@ -3,7 +3,8 @@
 #include <vector>
 #include <iostream>
 
-const std::vector<std::vector<float>> ZERO_MATRIX = {{0}};
+const std::vector<std::vector<float>> ZERO_VECTOR = {{0}};
+const Matrix ZERO_MATRIX = ZERO_VECTOR;
 
 // Constructors
 Matrix::Matrix(std::initializer_list<std::vector<float>> arrays) {
@@ -16,7 +17,7 @@ Matrix::Matrix(std::initializer_list<std::vector<float>> arrays) {
     for (std::vector<float> v: this->data) {
         if (v.size() != l) {
             std::cout << "Matrix row size is variable!" << std::endl;
-            this->data = ZERO_MATRIX;
+            this->data = ZERO_VECTOR;
             l = 0;
             break;
         }
@@ -35,7 +36,7 @@ Matrix::Matrix(std::vector<std::vector<float>> new_mat) {
     for (std::vector<float> v: this->data) {
         if (v.size() != l) {
             std::cout << "Matrix row size is variable!" << std::endl;
-            this->data = ZERO_MATRIX;
+            this->data = ZERO_VECTOR;
             l = 0;
             break;
         }
@@ -67,4 +68,41 @@ void Matrix::display() {
         }
         std::cout << std::endl;
     }
+}
+
+// Operators
+Matrix Matrix::operator+(Matrix b) {
+    if (this->x != b.x || this->y != b.y) {
+        std::cout << "The matrix dimension is not valid!" << std::endl;
+        return ZERO_MATRIX;
+    }
+
+    std::vector<std::vector<float>> result;
+    for (size_t i_y = 0; i_y < this->y; ++i_y) {
+        std::vector<float> row;
+        for (size_t i_x = 0; i_x < this->x; ++i_x) {
+            row.push_back(this->data[i_y][i_x] + b.data[i_y][i_x]);
+        }
+        result.push_back(row);
+    }
+
+    return Matrix(result);
+}
+
+Matrix Matrix::operator-(Matrix b) {
+    if (this->x != b.x || this->y != b.y) {
+        std::cout << "The matrix dimension is not valid!" << std::endl;
+        return ZERO_MATRIX;
+    }
+
+    std::vector<std::vector<float>> result;
+    for (size_t i_y = 0; i_y < this->y; ++i_y) {
+        std::vector<float> row;
+        for (size_t i_x = 0; i_x < this->x; ++i_x) {
+            row.push_back(this->data[i_y][i_x] - b.data[i_y][i_x]);
+        }
+        result.push_back(row);
+    }
+
+    return Matrix(result);
 }
