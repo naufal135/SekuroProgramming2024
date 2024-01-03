@@ -15,7 +15,7 @@ class Swerve {
         // Methods
         Matrix velocityCommand(float v_x, float v_y, float omega);
         void updatePose(Matrix v, float dt);
-        void displayPose();
+        Matrix getPose();
 };
 
 #endif

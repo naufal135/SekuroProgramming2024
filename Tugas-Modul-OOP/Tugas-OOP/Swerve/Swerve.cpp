@@ -23,3 +23,17 @@ Matrix Swerve::velocityCommand(float v_x, float v_y, float omega) {
 
     return result;
 }
+
+void Swerve::updatePose(Matrix v_mat, float dt) {
+    Matrix v = {
+        {sqrtf(pow(v_mat[0, 0], 2) + pow(v_mat[0, 1], 2))},
+        {sqrtf(pow(v_mat[0, 2], 2) + pow(v_mat[0, 3], 2))},
+        {sqrtf(pow(v_mat[0, 4], 2) + pow(v_mat[0, 5], 2))}
+    };
+
+    *(this->pose) = *(this->pose) + v*dt;
+}
+
+Matrix Swerve::getPose() {
+    return *(this->pose);
+}
