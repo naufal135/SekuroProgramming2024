@@ -1,0 +1,2 @@
+service_pkg:topic_pkg
+-DCATKIN_DEVEL_PREFIX=/home/naufal/post-day-4/devel -DCMAKE_INSTALL_PREFIX=/home/naufal/post-day-4/install -G Unix Makefiles

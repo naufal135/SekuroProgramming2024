@@ -1,0 +1,10 @@
+(cl:defpackage service_pkg-srv
+  (:use )
+  (:export
+   "VECTORMAGNITUDE"
+   "<VECTORMAGNITUDE-REQUEST>"
+   "VECTORMAGNITUDE-REQUEST"
+   "<VECTORMAGNITUDE-RESPONSE>"
+   "VECTORMAGNITUDE-RESPONSE"
+  ))
+
